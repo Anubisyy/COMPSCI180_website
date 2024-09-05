@@ -2,4 +2,4 @@
 
 ## Project Site
 
-1. [project1](anubisyy.github.io/compsci180_website/project1.md)
+1. [project1](/project1.md)
