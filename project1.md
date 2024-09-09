@@ -1,3 +1,7 @@
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
 # Project1: Images of the Russian Empire
 
 The goal of this assignment is to take the digitized Prokudin-Gorskii glass plate images and, using image processing techniques, automatically produce a color image with as few visual artifacts as possible.
@@ -135,7 +139,7 @@ Upon reviewing the original channels, I found that the three original channels e
 <div style="text-align: center;">
     <img src="project1_data/light.jpg" alt="aligned_emir" style="zoom:12%;" />
 </div>
-The Structural Similarity Index (SSIM) between two images $ x $ and $ y $ is defined as:
+The Structural Similarity Index (SSIM) between two images $x$ and $y$ is defined as:
 
 $$
 SSIM(x, y) = \frac{(2\mu_x \mu_y + c_1)(2\sigma_{xy} + c_2)}{(\mu_x^2 + \mu_y^2 + c_1)(\sigma_x^2 + \sigma_y^2 + c_2)}
