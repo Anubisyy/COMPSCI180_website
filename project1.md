@@ -37,7 +37,11 @@ After implementing the improvements, my algorithm achieved precise and fast alig
 
 An **image pyramid** is a multi-scale representation of an image, often used in image processing tasks such as alignment, compression, and object detection. The idea is to create a series of progressively smaller images, each formed by downscaling the original image. These smaller images are stacked like a pyramid, with the original image at the base and the smallest image at the top.
 
-![pyramid_example](project1_data\pyramid_example.png)
+<div style="text-align: center;">
+    <img src="project1_data/pyramid_example.png" alt="aligned_emir" style="zoom:100%;" />
+</div>
+
+
 
 There are two main types of image pyramids:
 
@@ -118,14 +122,21 @@ Using these techniques, the algorithm now only takes 2 to 3 seconds to align a 3
 ### Step 3: Addressing the issue of brightness differences in the channels of emir.tif.
 Through the optimizations in Step 2, I have established a fast image alignment algorithm, but the alignment effect for emir.tif turned out to be surprisingly poor, with the offset of the red channel clearly miscalculated. 
 
-<img src="project1_data\bad_emir.jpg" alt="bad_emir" style="zoom: 10%;" />
+<div style="text-align: center;">
+    <img src="project1_data/bad_emir.jpg" alt="bad_emir" style="zoom: 10%;" />
+</div>
 
 Upon reviewing the original channels, I found that the three original channels exhibited completely different brightness levels, and the existing SSD-based alignment method could not handle such images. Therefore, I applied **histogram equalization** to balance the brightness of the three channels, and then used the **structural similarity (SSIM)** method for alignment.
 
 **Brightness Equalization of Three Channels:**
 
-![light](project1_data\light.jpg)
+
+<div style="text-align: center;">
+    <img src="project1_data/light.jpg" alt="aligned_emir" style="zoom:12%;" />
+</div>
 
 **The final result:** g_offset: (48, 22), r_offset: (102, 40)
 
-<img src="project1_data\aligned_emir.jpg" alt="aligned_emir" style="zoom:12%;" />
+<div style="text-align: center;">
+    <img src="project1_data/aligned_emir.jpg" alt="aligned_emir" style="zoom:12%;" />
+</div>
