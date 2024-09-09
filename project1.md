@@ -157,7 +157,7 @@ where:
   $$
   c_1 = (k_1 L)^2, \quad c_2 = (k_2 L)^2
   $$
-- $L$: Dynamic range of pixel values (e.g., 255 for 8-bit grayscale images)
+- $$L$$: Dynamic range of pixel values (e.g., 255 for 8-bit grayscale images)
 - $$k_1$$ and $$k_2$$: Small constants, typically $$ k_1 = 0.01 $$ and $$k_2 = 0.03 $$
 
 **The final result:** g_offset: (48, 22), r_offset: (102, 40)
