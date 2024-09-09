@@ -140,7 +140,7 @@ Upon reviewing the original channels, I found that the three original channels e
     <img src="project1_data/light.jpg" alt="aligned_emir" style="zoom:12%;" />
 </div>
 
-The Structural Similarity Index (SSIM) between two images $$x$$ and $y$ is defined as:
+The Structural Similarity Index (SSIM) between two images $$x$$ and $$y$$ is defined as:
 
 $$
 SSIM(x, y) = \frac{(2\mu_x \mu_y + c_1)(2\sigma_{xy} + c_2)}{(\mu_x^2 + \mu_y^2 + c_1)(\sigma_x^2 + \sigma_y^2 + c_2)}
@@ -148,17 +148,17 @@ $$
 
 where:
 
-- $\mu_x$: Mean of $x$
-- $\mu_y$: Mean of $y$
-- $\sigma_x^2$: Variance of $x$
-- $\sigma_y^2$: Variance of $y$
-- $\sigma_{xy}$: Covariance of $x$ and $y$
-- $c_1$ and $c_2$: Constants to stabilize the division, typically defined as:
+- $$\mu_x$$: Mean of $$x$$
+- $$\mu_y$$: Mean of $$y$$
+- $$\sigma_x^2$$: Variance of $$x$$
+- $$\sigma_y^2$$: Variance of $$y$$
+- $$\sigma_{xy}$$: Covariance of $$x$$ and $$y$$
+- $$c_1$$ and $$c_2$$: Constants to stabilize the division, typically defined as:
   $$
   c_1 = (k_1 L)^2, \quad c_2 = (k_2 L)^2
   $$
 - $L$: Dynamic range of pixel values (e.g., 255 for 8-bit grayscale images)
-- $k_1$ and $k_2$: Small constants, typically $ k_1 = 0.01 $ and $ k_2 = 0.03 $
+- $$k_1$$ and $$k_2$$: Small constants, typically $$ k_1 = 0.01 $$ and $$k_2 = 0.03 $$
 
 **The final result:** g_offset: (48, 22), r_offset: (102, 40)
 
