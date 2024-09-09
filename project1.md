@@ -140,7 +140,7 @@ Upon reviewing the original channels, I found that the three original channels e
     <img src="project1_data/light.jpg" alt="aligned_emir" style="zoom:12%;" />
 </div>
 
-The Structural Similarity Index (SSIM) between two images $x$ and $y$ is defined as:
+The Structural Similarity Index (SSIM) between two images $$x$$ and $y$ is defined as:
 
 $$
 SSIM(x, y) = \frac{(2\mu_x \mu_y + c_1)(2\sigma_{xy} + c_2)}{(\mu_x^2 + \mu_y^2 + c_1)(\sigma_x^2 + \sigma_y^2 + c_2)}
