@@ -188,9 +188,11 @@ The `apply_white_balance` function is designed to correct the color balance of a
    $$
    \text{avg}_r = \frac{1}{N} \sum_{i=1}^{N} \text{image}[i, j, 0]
    $$
+   
    $$
    \text{avg}_g = \frac{1}{N} \sum_{i=1}^{N} \text{image}[i, j, 1]
    $$
+
    $$
    \text{avg}_b = \frac{1}{N} \sum_{i=1}^{N} \text{image}[i, j, 2]
    $$
@@ -209,12 +211,15 @@ The `apply_white_balance` function is designed to correct the color balance of a
    $$
    \text{image}[:, :, 0] \leftarrow \text{image}[:, :, 0] \times \frac{\text{avg}_{\text{gray}}}{\text{avg}_r}
    $$
+
    $$
    \text{image}[:, :, 1] \leftarrow \text{image}[:, :, 1] \times \frac{\text{avg}_{\text{gray}}}{\text{avg}_g}
    $$
+
    $$
    \text{image}[:, :, 2] \leftarrow \text{image}[:, :, 2] \times \frac{\text{avg}_{\text{gray}}}{\text{avg}_b}
    $$
+
 
 5. **Clip Values and Convert Back to `uint8`:**
    Finally, ensure that pixel values are within the valid range $$[0, 255]$$ and convert the image back to `uint8` type:
@@ -222,6 +227,7 @@ The `apply_white_balance` function is designed to correct the color balance of a
    $$
    \text{image} \leftarrow \text{np.clip}(\text{image}, 0, 255).astype(\text{np.uint8})
    $$
+
 
 This method effectively balances the colors by equalizing the average intensity across all color channels, leading to a more visually consistent image.
 
