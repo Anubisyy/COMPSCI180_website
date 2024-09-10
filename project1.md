@@ -165,3 +165,117 @@ where:
 <div style="text-align: center;">
     <img src="project1_data/aligned_emir.jpg" alt="aligned_emir" style="zoom:12%;" />
 </div>
+
+### Step 4: Edge Correction, White Balance, and Image Enhancement (Bells & Whistles)
+
+Here is a Markdown explanation of the white balance adjustment portion of your code, written with LaTeX formulas:
+
+---
+
+### White Balance Adjustment
+
+The `apply_white_balance` function is designed to correct the color balance of an image so that the colors appear more natural and consistent. The process involves adjusting each color channel to match the average intensity of all channels. Here's a step-by-step breakdown:
+
+1. **Convert Image to Float Precision:**
+   The image is first converted to a `float32` type to ensure precision during the adjustment process.
+   $$
+   \text{image} \leftarrow \text{image}.astype(\text{np.float32})
+   $$
+
+2. **Calculate Average Intensity for Each Channel:**
+   For each color channel (Red, Green, Blue), compute the average pixel value:
+    
+   $$
+   \text{avg}_r = \frac{1}{N} \sum_{i=1}^{N} \text{image}[i, j, 0]
+   $$
+   $$
+   \text{avg}_g = \frac{1}{N} \sum_{i=1}^{N} \text{image}[i, j, 1]
+   $$
+   $$
+   \text{avg}_b = \frac{1}{N} \sum_{i=1}^{N} \text{image}[i, j, 2]
+   $$
+
+   where $$N$$ is the total number of pixels in the image, and $$\text{image}[i, j, 0]$$, $$\text{image}[i, j, 1]$$, and $$\text{image}[i, j, 2]$$ represent the pixel values for the Red, Green, and Blue channels, respectively.
+
+3. **Calculate the Overall Average Intensity:**
+
+   $$
+   \text{avg}_{\text{gray}} = \frac{\text{avg}_r + \text{avg}_g + \text{avg}_b}{3}
+   $$
+
+4. **Adjust Each Channel:**
+   Scale each channel so that its average matches the overall average intensity:
+
+   $$
+   \text{image}[:, :, 0] \leftarrow \text{image}[:, :, 0] \times \frac{\text{avg}_{\text{gray}}}{\text{avg}_r}
+   $$
+   $$
+   \text{image}[:, :, 1] \leftarrow \text{image}[:, :, 1] \times \frac{\text{avg}_{\text{gray}}}{\text{avg}_g}
+   $$
+   $$
+   \text{image}[:, :, 2] \leftarrow \text{image}[:, :, 2] \times \frac{\text{avg}_{\text{gray}}}{\text{avg}_b}
+   $$
+
+5. **Clip Values and Convert Back to `uint8`:**
+   Finally, ensure that pixel values are within the valid range $$[0, 255]$$ and convert the image back to `uint8` type:
+
+   $$
+   \text{image} \leftarrow \text{np.clip}(\text{image}, 0, 255).astype(\text{np.uint8})
+   $$
+
+This method effectively balances the colors by equalizing the average intensity across all color channels, leading to a more visually consistent image.
+
+---
+
+After center cropping to remove borders, performing white balance, and enhancing saturation, the optimized result was obtained.
+
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+    <div style="text-align: center;">
+        <h6>train.jpg</h6>
+        <img src="project1_data/enhanced/aligned_train.jpg" alt="train" style="width: 100%;">
+    </div>
+    <div style="text-align: center;">
+        <h6>church.jpg</h6>
+        <img src="project1_data/enhanced/aligned_church.jpg" alt="church" style="width: 100%;">
+    </div>
+    <div style="text-align: center;">
+        <h6>harvesters.jpg</h6>
+        <img src="project1_data/enhanced/aligned_harvesters.jpg" alt="harvesters" style="width: 100%;">
+    </div>
+    <div style="text-align: center;">
+        <h6>icon.jpg</h6>
+        <img src="project1_data/enhanced/aligned_icon.jpg" alt="icon" style="width: 100%;">
+    </div>
+    <div style="text-align: center;">
+        <h6>melons.jpg</h6>
+        <img src="project1_data/enhanced/aligned_melons.jpg" alt="melons" style="width: 100%;">
+    </div>
+    <div style="text-align: center;">
+        <h6>onion_church.jpg</h6>
+        <img src="project1_data/enhanced/aligned_onion_church.jpg" alt="onion_church" style="width: 100%;">
+    </div>
+    <div style="text-align: center;">
+        <h6>sculpture.jpg</h6>
+        <img src="project1_data/enhanced/aligned_sculpture.jpg" alt="sculpture" style="width: 100%;">
+    </div>
+    <div style="text-align: center;">
+        <h6>self_portrait.jpg</h6>
+        <img src="project1_data/enhanced/aligned_self_portrait.jpg" alt="self_portrait" style="width: 100%;">
+    </div>
+    <div style="text-align: center;">
+        <h6>three_generations.jpg</h6>
+        <img src="project1_data/enhanced/aligned_three_generations.jpg" alt="three_generations" style="width: 100%;">
+    </div>
+    <div style="text-align: center;">
+        <h6>lady.jpg</h6>
+        <img src="project1_data/enhanced/aligned_lady.jpg" alt="sculpture" style="width: 100%;">
+    </div>
+    <div style="text-align: center;">
+        <h6>emir.jpg</h6>
+        <img src="project1_data/enhanced/aligned_emir.jpg" alt="self_portrait" style="width: 100%;">
+    </div>
+    <div style="text-align: center;">
+        <h6>monastery.jpg</h6>
+        <img src="project1_data/enhanced/monastery_out.jpg" alt="monastery" style="width: 100%;">
+    </div>
+</div>
