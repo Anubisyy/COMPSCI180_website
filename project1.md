@@ -42,7 +42,7 @@ After implementing the improvements, my algorithm achieved precise and fast alig
 An **image pyramid** is a multi-scale representation of an image, often used in image processing tasks such as alignment, compression, and object detection. The idea is to create a series of progressively smaller images, each formed by downscaling the original image. These smaller images are stacked like a pyramid, with the original image at the base and the smallest image at the top.
 
 <div style="text-align: center;">
-    <img src="project1_data/pyramid_example.png" alt="aligned_emir" style="zoom:100%;" />
+    <img src="project1_data/pyramid_example.png" alt="pyramid_example.png" style="zoom:100%;" />
 </div>
 
 
@@ -178,6 +178,7 @@ The `apply_white_balance` function is designed to correct the color balance of a
 
 1. **Convert Image to Float Precision:**
    The image is first converted to a `float32` type to ensure precision during the adjustment process.
+
    $$
    \text{image} \leftarrow \text{image}.astype(\text{np.float32})
    $$
@@ -188,7 +189,7 @@ The `apply_white_balance` function is designed to correct the color balance of a
    $$
    \text{avg}_r = \frac{1}{N} \sum_{i=1}^{N} \text{image}[i, j, 0]
    $$
-   
+
    $$
    \text{avg}_g = \frac{1}{N} \sum_{i=1}^{N} \text{image}[i, j, 1]
    $$
