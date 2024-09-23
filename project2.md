@@ -6,6 +6,7 @@ In this part, we will build intuitions about 2D convolutions and filtering.
 ### Part 1.1: Finite Difference Operator
 
 We will begin by using the humble finite difference as our filter in the x and y directions.
+
 $$
 D_x = \begin{bmatrix}
 1 & -1
@@ -15,6 +16,7 @@ D_y = \begin{bmatrix}
 -1
 \end{bmatrix}
 $$
+
 ![Part 1.1 Finite Difference Operator](project2_data/part1_1.png)
 
 ### Part 1.2: Derivative of Gaussian (DoG) Filter
