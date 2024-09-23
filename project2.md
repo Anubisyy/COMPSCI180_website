@@ -7,13 +7,13 @@ In this part, we will build intuitions about 2D convolutions and filtering.
 
 We will begin by using the humble finite difference as our filter in the x and y directions.
 
-$$D_x = \begin{bmatrix}
+\[D_x = \begin{bmatrix}
 1 & -1
 \end{bmatrix},\ \ 
 D_y = \begin{bmatrix}
 1 \\
 -1
-\end{bmatrix}$$
+\end{bmatrix}\]
 
 The Finite Difference Operator estimates image gradients by computing horizontal and vertical derivatives, which reveal intensity changes, indicating edges. It uses simple kernels to calculate these derivatives through convolution, and the gradient magnitude is derived by combining both directions. However, this method is sensitive to noise, as it directly processes raw pixel values. Edges are detected by thresholding the gradient magnitudes, making it a straightforward but noise-prone approach for edge detection. After multiple adjustments to the threshold and implementations, I found that the best result was achieved with a threshold of 60.
 
