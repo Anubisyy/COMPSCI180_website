@@ -7,6 +7,8 @@ In this part, we will build intuitions about 2D convolutions and filtering.
 
 We will begin by using the humble finite difference as our filter in the x and y directions.
 
+$$y$$
+
 $$D_x = \begin{bmatrix}
 1 & -1
 \end{bmatrix},\ \ 
