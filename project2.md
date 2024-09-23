@@ -11,6 +11,11 @@
     padding: 10px;
     border-radius: 5px;
   }
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
 </style>
 
 # CS 180 Project 2: Fun with Filters and Frequencies
@@ -48,7 +53,13 @@ These two methods get the same result.
 ## Part 2: Fun with Frequencies!
 
 ### Part 2.1: Image "Sharpening"
+The principle of sharpening an image by subtracting a Gaussian-blurred version from the original image is based on enhancing edges and fine details. In this process, the original image is first blurred using a Gaussian filter to reduce noise and smooth out the details. By subtracting this blurred image from the original, the high-frequency components (representing edges and details) are amplified.
+
 ![Part 2.1: Image "Sharpening"](project2_data/taj.png)
+![Part 2.1: Image "Sharpening"](project2_data/2_1/tower.png)
+
+For a character image from GTA5, I first applied a blur and then sharpening, and found that the sharpening effect was significant.
+
 <div style="display: flex; justify-content: space-around;">
     <div style="text-align: center;">
         <img src="project2_data/2_1/GTA5.jpg" alt="GTA5"/>
@@ -87,9 +98,26 @@ These two methods get the same result.
 </div>
 
 ### Part 2.2: Hybrid Images
+1. **Cropping and Resizing Images**:
+   - Crop and resize two images to ensure they have the same dimensions. This step is essential for allowing effective blending in the later stages.
+
+2. **Defining the Gaussian Function**:
+   - Use the Gaussian function to model the filtering process. This function helps in determining how much each pixel contributes to the final image based on its distance from the center of the filter.
+
+3. **Creating Filter Matrices**:
+   - Generate filter matrices for both low-pass and high-pass filtering. For low-pass filtering, I applied the Gaussian function directly to retain smooth features. In contrast, for high-pass filtering, I inverted the Gaussian to enhance the image's edges and details.
+
+4. **Applying Frequency Domain Filtering**:
+   - Transforme the color channels of the images into the frequency domain using Fast Fourier Transform (FFT). This allows to apply the filter matrices effectively. After filtering, transform the images back to the spatial domain to retrieve the modified pixel values.
+
 ![Part 2.2: Hybrid Images](project2_data/2_2/1.png)
 
+I like the game Elden Ring, so I decided to make a funny version of Melina.
+
 ![Part 2.2: Hybrid Images](project2_data/2_2/2.png)
+
+There are also some funny ideas.
+
 ![Part 2.2: Hybrid Images](project2_data/2_2/3.png)
 ![Part 2.2: Hybrid Images](project2_data/2_2/4.png)
 
