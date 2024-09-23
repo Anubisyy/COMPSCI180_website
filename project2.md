@@ -29,6 +29,24 @@ We will begin by using the humble finite difference as our filter in the x and y
 
 $$D_x = \begin{bmatrix}1 & -1\end{bmatrix}, D_y = \begin{bmatrix}1 \\-1\end{bmatrix}$$
 
+The gradient magnitude calculation involves the following theoretical steps:
+
+1. Image Representation: The image is represented as a 2D array of pixel intensities.
+
+2. Derivative Operators: Two derivative operators are defined:
+
+3. Horizontal Derivative Operator (D_x): Detects changes in the horizontal direction.
+Vertical Derivative Operator (D_y): Detects changes in the vertical direction.
+Convolution: The image is convolved with the horizontal and vertical derivative operators to compute the derivatives in the x and y directions. This step highlights the intensity changes in the respective directions.
+
+4. Gradient Magnitude Calculation: The gradient magnitude at each pixel is computed using the formula: 
+    $$
+    \text{gradient\_magnitude} = \sqrt{\text{derivative\_x}^2 + \text{derivative\_y}^2}
+    $$
+    This combines the horizontal and vertical derivatives to give the overall edge strength at each pixel.
+
+5. Edge Detection: A threshold is applied to the gradient magnitude to create a binary edge image, where pixels with gradient magnitudes above the threshold are considered edges.
+
 The Finite Difference Operator estimates image gradients by computing horizontal and vertical derivatives, which reveal intensity changes, indicating edges. It uses simple kernels to calculate these derivatives through convolution, and the gradient magnitude is derived by combining both directions. However, this method is sensitive to noise, as it directly processes raw pixel values. Edges are detected by thresholding the gradient magnitudes, making it a straightforward but noise-prone approach for edge detection. After multiple adjustments to the threshold and implementations, I found that the best result was achieved with a threshold of 60.
 
 ![Part 1.1 Finite Difference Operator](project2_data/1/1.png)
