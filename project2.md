@@ -7,8 +7,6 @@ In this part, we will build intuitions about 2D convolutions and filtering.
 
 We will begin by using the humble finite difference as our filter in the x and y directions.
 
-$$y$$
-
 $$D_x = \begin{bmatrix}
 1 & -1
 \end{bmatrix},\ \ 
@@ -17,10 +15,21 @@ D_y = \begin{bmatrix}
 -1
 \end{bmatrix}$$
 
-![Part 1.1 Finite Difference Operator](project2_data/part1_1.png)
+The Finite Difference Operator estimates image gradients by computing horizontal and vertical derivatives, which reveal intensity changes, indicating edges. It uses simple kernels to calculate these derivatives through convolution, and the gradient magnitude is derived by combining both directions. However, this method is sensitive to noise, as it directly processes raw pixel values. Edges are detected by thresholding the gradient magnitudes, making it a straightforward but noise-prone approach for edge detection. After multiple adjustments to the threshold and implementations, I found that the best result was achieved with a threshold of 60.
+
+![Part 1.1 Finite Difference Operator](project2_data/1/1.png)
 
 ### Part 1.2: Derivative of Gaussian (DoG) Filter
-![Part 1.2 Derivative of Gaussian (DoG) Filter](project2_data/part1_2.png)
+Firstly, create a blurred version of the original image by convolving with a gaussian and repeat the procedure in the previous part (using `cv2.getGaussianKernel()` to create a 1D gaussian and then taking an outer product with its transpose to get a 2D gaussian kernel).
+
+The processed image clearly contains less noise and has more distinct edges.
+![Part 1.2 Derivative of Gaussian (DoG) Filter](project2_data/1/2.png)
+
+Then, do the same thing with a single convolution instead of two by creating a derivative of gaussian filters (DoG Filter)
+![Part 1.2 Derivative of Gaussian (DoG) Filter](project2_data/1/3.png)
+![Part 1.2 Derivative of Gaussian (DoG) Filter](project2_data/1/4.png)
+These two methods get the same result.
+![Part 1.2 Derivative of Gaussian (DoG) Filter](project2_data/1/5.png)
 
 
 ## Part 2: Fun with Frequencies!
