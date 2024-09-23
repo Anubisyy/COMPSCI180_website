@@ -32,9 +32,11 @@ The Finite Difference Operator estimates image gradients by computing horizontal
 Firstly, create a blurred version of the original image by convolving with a gaussian and repeat the procedure in the previous part (using `cv2.getGaussianKernel()` to create a 1D gaussian and then taking an outer product with its transpose to get a 2D gaussian kernel).
 
 The processed image clearly contains less noise and has more distinct edges.
+
 ![Part 1.2 Derivative of Gaussian (DoG) Filter](project2_data/1/2.png)
 
 Then, do the same thing with a single convolution instead of two by creating a derivative of gaussian filters (DoG Filter)
+
 ![Part 1.2 Derivative of Gaussian (DoG) Filter](project2_data/1/3.png)
 ![Part 1.2 Derivative of Gaussian (DoG) Filter](project2_data/1/4.png)
 These two methods get the same result.
