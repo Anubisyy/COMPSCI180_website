@@ -40,9 +40,11 @@ Vertical Derivative Operator (D_y): Detects changes in the vertical direction.
 Convolution: The image is convolved with the horizontal and vertical derivative operators to compute the derivatives in the x and y directions. This step highlights the intensity changes in the respective directions.
 
 4. Gradient Magnitude Calculation: The gradient magnitude at each pixel is computed using the formula: 
+    
     $$
-    \text{gradient\_magnitude} = \sqrt{\text{derivative\_x}^2 + \text{derivative\_y}^2}
+    \text{gradient_magnitude} = \sqrt{\text{derivative_x}^2 + \text{derivative_y}^2}
     $$
+
     This combines the horizontal and vertical derivatives to give the overall edge strength at each pixel.
 
 5. Edge Detection: A threshold is applied to the gradient magnitude to create a binary edge image, where pixels with gradient magnitudes above the threshold are considered edges.
