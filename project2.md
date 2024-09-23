@@ -129,11 +129,16 @@ There are also some funny ideas.
 <div style="text-align: center;">
     <img src="project2_data/2_3/mask.png" alt="Part 2.3: Gaussian and Laplacian Stacks" style="width: 40%;"/>
 </div>
-Process:
+
+Implement a Gaussian and a Laplacian stack. The different between a stack and a pyramid is that in each level of the pyramid the image is downsampled, so that the result gets smaller and smaller. In a stack the images are never downsampled so the results are all the same dimension as the original image, and can all be saved in one 3D matrix (if the original image was a grayscale image).
+
+Here is the process of creating stacks.
 
 ![Part 2.3: Gaussian and Laplacian Stacks](project2_data/2_3/laplacian_apple.png)
 ![Part 2.3: Gaussian and Laplacian Stacks](project2_data/2_3/laplacian_orange.png)
-Result:
+
+Apply the Gaussian and Laplacian stacks to the Oraple and recreate the outcomes of Figure 3.42 in Szelski (Ed 2) page 167.
+
 ![Part 2.3: Gaussian and Laplacian Stacks](project2_data/2_3/process.png)
 ![Part 2.3: Gaussian and Laplacian Stacks](project2_data/2_3/final.png)
 
