@@ -125,9 +125,11 @@ Result:
         <img src="project2_data/2_4/mask.png" alt="mask"/>
         <p>mask</p>
     </div>
+    <div style="text-align: center;">
+        <img src="project2_data/2_4/dog_plane.png" alt="dog_plane"/>
+        <p>dog_plane</p>
+    </div>
 </div>
-
-![Part 2.3: Gaussian and Laplacian Stacks](project2_data/2_4/dog_plane.png)
 
 
 <div style="display: flex; justify-content: space-around;">
@@ -149,6 +151,8 @@ Result:
         <img src="project2_data/2_4/cat_mask.png" alt="cat_mask"/>
         <p>mask</p>
     </div>
+    <div style="text-align: center;">
+        <img src="project2_data/2_4/cat_cake.png" alt="cat_cake"/>
+        <p>cat_cake</p>
+    </div>
 </div>
-
-![Part 2.3: Gaussian and Laplacian Stacks](project2_data/2_4/cat_cake.png)
