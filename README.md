@@ -2,4 +2,5 @@
 
 ## Project Site
 
-1. [project1](/project1.md)
+1. [Project1](/project1.md)
+2. [Project1](/project2.md)
