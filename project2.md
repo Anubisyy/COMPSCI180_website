@@ -39,7 +39,9 @@ Then, do the same thing with a single convolution instead of two by creating a d
 
 ![Part 1.2 Derivative of Gaussian (DoG) Filter](project2_data/1/3.png)
 ![Part 1.2 Derivative of Gaussian (DoG) Filter](project2_data/1/4.png)
+
 These two methods get the same result.
+
 ![Part 1.2 Derivative of Gaussian (DoG) Filter](project2_data/1/5.png)
 
 
