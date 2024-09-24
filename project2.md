@@ -154,6 +154,7 @@ For a character image from GTA5, I first applied a blur and then sharpening, and
 **Bells & Whistles:** Using color to enhance the effect, I found that both high-frequency and low-frequency images work best when their colors are preserved, so I chose to use color images for my work.
 
 **About bad results:** My initial attempt resulted in an incorrect outcome because I did not consider that overlaying two images might cause pixel values to exceed the range of 255, leading to distortion in one of the RGB channels, manifesting as bizarre color artifacts. This was due to the lack of a normalization step.
+
 ![Part 2.2: Hybrid Images](project2_data/2_2/bad_result.png)
 
 After fixing this bug, I got the perfect result:
@@ -191,6 +192,8 @@ Apply the Gaussian and Laplacian stacks to the Oraple and recreate the outcomes 
 ![Part 2.3: Gaussian and Laplacian Stacks](project2_data/2_3/final.png)
 
 ### Part 2.4: Multiresolution Blending
+
+The masks are produced by Segment Anything (Research by Meta AI) https://segment-anything.com
 <div style="display: flex; justify-content: space-around;">
     <div style="text-align: center;">
         <img src="project2_data/2_4/dog.png" alt="dog" style="width: 60%;"/>
