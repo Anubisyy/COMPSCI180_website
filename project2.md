@@ -73,9 +73,30 @@ These two methods get the same result.
 ## Part 2: Fun with Frequencies!
 
 ### Part 2.1: Image "Sharpening"
-The principle of sharpening an image by subtracting a Gaussian-blurred version from the original image is based on enhancing edges and fine details. In this process, the original image is first blurred using a Gaussian filter to reduce noise and smooth out the details. By subtracting this blurred image from the original, the high-frequency components (representing edges and details) are amplified.
+The principle of sharpening an image by subtracting a Gaussian-blurred version from the original image is based on enhancing edges and fine details. In this process, the original image is first blurred using a Gaussian filter to reduce noise and smooth out the details. By subtracting this blurred image from the original, the high-frequency components (representing edges and details) are amplified. Steps:
+
+1. **Image Normalization**: The input image is read and normalized to have pixel values in the range \([0, 1]\).
+
+2. **Gaussian Blurring**: A Gaussian blur is applied to the normalized image. This involves convolving the image with a Gaussian kernel, which smooths the image by averaging pixel values with their neighbors, weighted by a Gaussian function. Mathematically, the Gaussian function is given by:
+
+   $$
+   G(x, y) = \frac{1}{2\pi\sigma^2} e^{-\frac{x^2 + y^2}{2\sigma^2}}
+   $$
+
+3. **High-Frequency Component Extraction**: The high-frequency components of the image are extracted by subtracting the blurred image from the original image. This step isolates the details and edges in the image. If \(I\) is the original image and \(B\) is the blurred image, the high-frequency component \(H\) is:
+
+   $$
+   H = I - B
+   $$
+
+4. **Sharpening**: The high-frequency components are scaled by a factor (\(\alpha\)) and added back to the original image. This enhances the details and edges, making the image appear sharper. The sharpened image \(S\) is given by:
+
+   $$
+   S = I + \alpha H = I + \alpha (I - B)
+   $$
 
 ![Part 2.1: Image "Sharpening"](project2_data/taj.png)
+![Part 2.1: Image "Sharpening"](project2_data/2_1/taj2.png)
 ![Part 2.1: Image "Sharpening"](project2_data/2_1/tower.png)
 
 For a character image from GTA5, I first applied a blur and then sharpening, and found that the sharpening effect was significant.
@@ -129,6 +150,13 @@ For a character image from GTA5, I first applied a blur and then sharpening, and
 
 4. **Applying Frequency Domain Filtering**:
    - Transforme the color channels of the images into the frequency domain using Fast Fourier Transform (FFT). This allows to apply the filter matrices effectively. After filtering, transform the images back to the spatial domain to retrieve the modified pixel values.
+
+**Bells & Whistles:** Using color to enhance the effect, I found that both high-frequency and low-frequency images work best when their colors are preserved, so I chose to use color images for my work.
+
+**About bad results:** My initial attempt resulted in an incorrect outcome because I did not consider that overlaying two images might cause pixel values to exceed the range of 255, leading to distortion in one of the RGB channels, manifesting as bizarre color artifacts. This was due to the lack of a normalization step.
+![Part 2.2: Hybrid Images](project2_data/2_2/bad_result.png)
+
+After fixing this bug, I got the perfect result:
 
 ![Part 2.2: Hybrid Images](project2_data/2_2/1.png)
 
