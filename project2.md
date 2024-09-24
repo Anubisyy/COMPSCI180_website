@@ -193,7 +193,7 @@ Apply the Gaussian and Laplacian stacks to the Oraple and recreate the outcomes 
 
 ### Part 2.4: Multiresolution Blending
 
-The masks are produced by Segment Anything (Research by Meta AI) https://segment-anything.com
+The masks are produced by [Segment Anything (Research by Meta AI)](https://segment-anything.com)
 <div style="display: flex; justify-content: space-around;">
     <div style="text-align: center;">
         <img src="project2_data/2_4/dog.png" alt="dog" style="width: 60%;"/>
