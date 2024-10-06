@@ -80,7 +80,7 @@ $$
 
 - Calculation of the bounding rectangle coordinates: $i = 1, 2, 3$ represents the three vertices of the triangle.
 $$
-\text{src\_rect} = \left(\min(x_i), \min(y_i), \max(x_i) - \min(x_i), \max(y_i) - \min(y_i)\right)
+\text{src_rect} = \left(\min(x_i), \min(y_i), \max(x_i) - \min(x_i), \max(y_i) - \min(y_i)\right)
 $$
 ![](project3_data/part2.png)
 
