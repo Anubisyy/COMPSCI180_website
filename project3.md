@@ -87,7 +87,7 @@ $$
 ## Part 3: The Morph Sequence
 Using a range of weights in [0, 1] I created a morph sequence:
 
-![](project3_data/blended_faces.gif)
+![](project3_data/blended_faces.gif?raw=true)
 
 ## Part 4: The "Mean Face" of a population
 I used FEI [Face Database](https://fei.edu.br/~cet/facedatabase.html) with 200 faces to compute the average face.
