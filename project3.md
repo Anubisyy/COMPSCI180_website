@@ -56,7 +56,7 @@ $$
 4. Applying Affine Transformation: Use `cv2.warpAffine` to apply the affine transformation to the extracted rectangular image region, yielding the transformed image region.
 5. Mask Generation and Composition: Create a mask for the target rectangular region to ensure that only the transformed area is composed into the corresponding position of the target image.
 
-- The matrix form of affine transformation: $tx$ and $ty$ are the translation vectors.
+- The matrix form of affine transformation: $$tx$$ and $$ty$$ are the translation vectors.
 $$
 \begin{bmatrix}
 x' \\
@@ -78,7 +78,7 @@ ty
 \end{bmatrix}
 $$ 
 
-- Calculation of the bounding rectangle coordinates: $i = 1, 2, 3$ represents the three vertices of the triangle.
+- Calculation of the bounding rectangle coordinates: $$i = 1, 2, 3$$ represents the three vertices of the triangle.
 $$
 \text{src_rect} = \left(\min(x_i), \min(y_i), \max(x_i) - \min(x_i), \max(y_i) - \min(y_i)\right)
 $$
