@@ -4,4 +4,4 @@
 
 1. [Project1](/project1.md)
 2. [Project2](/project2.md)
-3. [Project3](/project3.html)
+3. [Project3](/project3.md)
