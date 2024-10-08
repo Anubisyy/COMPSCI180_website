@@ -7,7 +7,6 @@
     background-color: #FFFAF0;
   }
   .image-container {
-    background-color: #E0FFFF;
     padding: 10px;
     border-radius: 5px;
   }
@@ -86,6 +85,8 @@ $$
 
 ## Part 3: The Morph Sequence
 Using a range of weights in [0, 1] I created a morph sequence:
+
+This GIF animation will only play once in Markdown. You can right-click on this GIF to download it for repeated viewing.
 
 ![](project3_data/blended_faces.gif?raw=true)
 
