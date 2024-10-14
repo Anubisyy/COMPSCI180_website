@@ -77,9 +77,9 @@ We can stack the equations for all corresponding point pairs into a system of eq
 $$A \cdot \mathbf{h} = \mathbf{b}$$
 
 where:
-- $A$ is the matrix of coefficients formed by the known point coordinates.
-- $h$ is the vector of unknown homography parameters $h_{00},h_{01},...,h_{21}$.
-- $b$ is the vector of target points' coordinates $(x_2,y_2)$.
+- $$A$$ is the matrix of coefficients formed by the known point coordinates.
+- $$h$$ is the vector of unknown homography parameters $$h_{00},h_{01},...,h_{21}$$.
+- $$b$$ is the vector of target points' coordinates $$(x_2,y_2)$$.
 
 ### Step 3: Warp the Images
 
