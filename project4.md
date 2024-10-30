@@ -277,7 +277,7 @@ Image warping aligns one image with another using the estimated homography matri
 2. Place the transformed image onto a canvas that can accommodate both images.
 3. Use distance transforms to blend the images smoothly, weighting their contributions based on their distances from the overlap region.
 
-The final result is exactly the same as the effect of manually aligning the key points.
+The final result is exactly the same as the effect of manually aligning the key points. (The second row below shows the scenery in Forza, which is consistent with the result in Part A.)
 
 ![](project4_data/part_B/buildings.png)
 ![](project4_data/part_B/forza.png)
@@ -285,3 +285,8 @@ The final result is exactly the same as the effect of manually aligning the key 
 **However**, there are a few less ideal results. For example, in the case of blinds, when the scenery outside the window also lacks distinct features, the corner points on the blinds all look almost the same. The algorithm finds it difficult to compute the homography matrix from many similar focal points.
 
 ![](project4_data/part_B/window.png)
+
+### Cool Things : )
+- For Part A, I think the coolest thing is that you can stitch images into a panorama with just four manually marked points. I also found that the more dispersed the four marked corner points are, the better the fusion effect. Additionally, I was pleasantly surprised to discover that using distance transform instead of linear interpolation when blending images can perfectly eliminate artifacts.
+
+- For Part B, I finally achieved automatic stitching without manual marking. The coolest part is the RANSAC algorithm, which can iterate multiple times in a short period and find the optimal homography matrix, regardless of how messy the feature matches obtained after ANMS are.
