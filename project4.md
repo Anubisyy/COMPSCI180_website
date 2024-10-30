@@ -18,7 +18,7 @@
 </style>
 
 # CS 180 Project 4: Stitching Photo Mosaics
-## Part 1: Image Warping and Mosaicing
+## Part A: Image Warping and Mosaicing
 ### Step 1: Shoot the Pictures
 
 I took a series of photos of the blinds in my home with an Iphone. The set of blinds covers three windows in total, and I marked the vertices of the middle window as key points.
@@ -212,3 +212,76 @@ Streets in the game Cyberpunk 2077:
     <img src="project4_data/2077_blended_image.jpg" style="width: 100%;" />
   </div>
 </div>
+
+## Part B: Feature Matching for AutoStitching
+
+### Step 1: Harris Response
+The Harris response is calculated to detect corners in the image. This involves:
+
+1. Computing image gradients in the x and y directions using the Sobel filter.
+2. Squaring these gradients and computing their products.
+3. Applying Gaussian blur to these squared gradients and their product.
+4. Calculating the determinant and trace of the structure tensor.
+5. Using these values to compute the Harris response, which highlights potential corners.
+
+### Step 2: Adaptive Non-Maximal Suppression (ANMS)
+ANMS is used to select the most prominent corners from the Harris response:
+
+1. Sort the detected corners based on their response values.
+2. Iteratively select corners that are not too close to already selected ones, ensuring a minimum distance between them.
+3. This reduces the number of corners while retaining the most significant ones.
+
+![](project4_data/part_B/harris.png)
+
+
+### Step 3: Feature Descriptor
+Feature descriptors describe the local appearance around each detected corner:
+
+1. Extract a patch of pixels around each corner.
+2. Apply Gaussian blur to reduce noise.
+3. Resize the patch to a smaller, fixed size.
+4. Normalize the patch to have zero mean and unit variance.
+5. This normalized patch serves as the feature descriptor for matching.
+
+<div style="display: flex; justify-content: space-between;">
+  <div style="text-align: center; width: 50%; margin-right: 10px;">
+    <img src="project4_data/part_B/disc1.png" style="width: 100%;" />
+  </div>
+  <div style="text-align: center; width: 50%; margin-left: 10px;">
+    <img src="project4_data/part_B/disc2.png" style="width: 100%;" />
+  </div>
+</div>
+
+### Step 4: Feature Matching
+Feature matching finds correspondences between feature descriptors from two images:
+
+1. Compute distances between all pairs of descriptors.
+2. Select pairs with the smallest distances.
+3. Apply a ratio test to ensure the best match is significantly better than the second-best match, reducing false matches.
+
+![](project4_data/part_B/match.png)
+
+
+### Step 5: RANSAC Homography
+RANSAC estimates the homography matrix between two sets of matched points:
+
+1. Iteratively select random subsets of matches.
+2. Compute the homography matrix for each subset.
+3. Determine the number of inliers for each homography matrix.
+4. Choose the homography matrix with the highest number of inliers as the best estimate.
+
+### Image Warping and Blending
+Image warping aligns one image with another using the estimated homography matrix:
+
+1. Transform the image using the homography matrix.
+2. Place the transformed image onto a canvas that can accommodate both images.
+3. Use distance transforms to blend the images smoothly, weighting their contributions based on their distances from the overlap region.
+
+The final result is exactly the same as the effect of manually aligning the key points.
+
+![](project4_data/part_B/buildings.png)
+![](project4_data/part_B/forza.png)
+
+**However**, there are a few less ideal results. For example, in the case of blinds, when the scenery outside the window also lacks distinct features, the corner points on the blinds all look almost the same. The algorithm finds it difficult to compute the homography matrix from many similar focal points.
+
+![](project4_data/part_B/window.png)
