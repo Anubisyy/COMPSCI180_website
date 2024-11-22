@@ -50,9 +50,9 @@ $$ q(x_t | x_0) = N(x_t ; \sqrt{\bar\alpha_t} x_0, (1 - \bar\alpha_t)\mathbf{I})
 
 which is equivalent to computing $$ x_t = \sqrt{\bar\alpha_t} x_0 + \sqrt{1 - \bar\alpha_t} \epsilon \quad \text{where}~ \epsilon \sim N(0, 1) \tag{2}$$
 
-That is, given a clean image $x_0$, we get a noisy image $ x_t $ at timestep $t$ by sampling from a Gaussian with mean $ \sqrt{\bar\alpha_t} x_0 $ and variance $ (1 - \bar\alpha_t) $. Note that the forward process is not _just_ adding noise -- we also scale the image.
+That is, given a clean image $$x_0$$, we get a noisy image $$ x_t $$ at timestep $$t$$ by sampling from a Gaussian with mean $$ \sqrt{\bar\alpha_t} x_0 $$ and variance $$ (1 - \bar\alpha_t) $$. Note that the forward process is not _just_ adding noise -- we also scale the image.
 
-You will need to use the `alphas_cumprod` variable, which contains the $\bar\alpha_t$ for all $ t \in [0, 999] $. Remember that $t=0$ corresponds to a clean image, and larger $t$ corresponds to more noise. Thus, $\bar\alpha_t$ is close to 1 for small $t$, and close to 0 for large $t$. Run the forward process on the test image with $ t \in [250, 500, 750] $. Show the results -- you should get progressively more noisy images.
+You will need to use the `alphas_cumprod` variable, which contains the $$\bar\alpha_t$$ for all $$ t \in [0, 999] $$. Remember that $$t=0$$ corresponds to a clean image, and larger $t$ corresponds to more noise. Thus, $$\bar\alpha_t$$ is close to 1 for small $$t$$, and close to 0 for large $$t$$. Run the forward process on the test image with $$ t \in [250, 500, 750] $$. Show the results -- you should get progressively more noisy images.
 
 ![](project5_data/part_A/1.png)
 
@@ -64,7 +64,7 @@ Let's try to denoise these images using classical methods. Again, take noisy ima
 
 #### 1.3 Implementing One Step Denoising
 
-Now, we'll use a pretrained diffusion model to denoise. The actual denoiser can be found at `stage_1.unet`. This is a UNet that has already been trained on a *very, very* large dataset of $(x_0, x_t)$ pairs of images. We can use it to recover Gaussian noise from the image. Then, we can remove this noise to recover (something close to) the original image. Note: this UNet is conditioned on the amount of Gaussian noise by taking timestep $t$ as additional input.
+Now, we'll use a pretrained diffusion model to denoise. The actual denoiser can be found at `stage_1.unet`. This is a UNet that has already been trained on a *very, very* large dataset of $$(x_0, x_t)$$ pairs of images. We can use it to recover Gaussian noise from the image. Then, we can remove this noise to recover (something close to) the original image. Note: this UNet is conditioned on the amount of Gaussian noise by taking timestep $t$ as additional input.
 
 Because this diffusion model was trained with text conditioning, we also need a text prompt embedding. We provide the embedding for the prompt `"a high quality photo"` for you to use. Later on, you can use your own text prompts.
 
@@ -76,13 +76,13 @@ In part 1.3, you should see that the denoising UNet does a much better job of pr
 
 But diffusion models are designed to denoise iteratively. In this part we will implement this.
 
-In theory, we could start with noise $x_{1000}$ at timestep $T=1000$, denoise for one step to get an estimate of $x_{999}$, and carry on until we get $x_0$. But this would require running the diffusion model 1000 times, which is quite slow (and costs $$$).
+In theory, we could start with noise $$x_{1000}$$ at timestep $$T=1000$$, denoise for one step to get an estimate of $$x_{999}$$, and carry on until we get $$x_0$$. But this would require running the diffusion model 1000 times, which is quite slow (and costs $$$).
 
 It turns out, we can actually speed things up by skipping steps. The rationale for why this is possible is due to a connection with differential equations. It's a tad complicated, and out of scope for this course, but if you're interested you can check out [this excellent article](https://yang-song.net/blog/2021/score/).
 
-To skip steps we can create a list of timesteps that we'll call `strided_timesteps`, which will be much shorter than the full list of 1000 timesteps. `strided_timesteps[0]` will correspond to the noisiest image (and thus the largest $t$) and `strided_timesteps[-1]` will correspond to a clean image (and thus $t = 0$). One simple way of constructing this list is by introducing a regular stride step (e.g. stride of 30 works well).
+To skip steps we can create a list of timesteps that we'll call `strided_timesteps`, which will be much shorter than the full list of 1000 timesteps. `strided_timesteps[0]` will correspond to the noisiest image (and thus the largest $t$) and `strided_timesteps[-1]` will correspond to a clean image (and thus $$t = 0$$). One simple way of constructing this list is by introducing a regular stride step (e.g. stride of 30 works well).
 
-On the `i`th denoising step we are at $ t = $ `strided_timesteps[i]`, and want to get to $ t' =$ `strided_timesteps[i+1]` (from more noisy to less noisy). To actually do this, we have the following formula:
+On the `i`th denoising step we are at $$ t = $$ `strided_timesteps[i]`, and want to get to $$ t' =$$ `strided_timesteps[i+1]` (from more noisy to less noisy). To actually do this, we have the following formula:
 
 $$ x_{t'} = \frac{\sqrt{\bar\alpha_{t'}}\beta_t}{1 - \bar\alpha_t} x_0 + \frac{\sqrt{\alpha_t}(1 - \bar\alpha_{t'})}{1 - \bar\alpha_t} x_t + v_\sigma\tag{3}$$
 
@@ -94,7 +94,7 @@ where:
 - $\beta_t = 1 - \alpha_t$
 - $x_0$ is our current estimate of the clean image using equation 2 just like in section 1.3
 
-The $v_\sigma$ is random noise, which in the case of DeepFloyd is also predicted. The process to compute this is not very important for us, so we supply a function, `add_variance`, to do this for you.
+The $$v_\sigma$$ is random noise, which in the case of DeepFloyd is also predicted. The process to compute this is not very important for us, so we supply a function, `add_variance`, to do this for you.
 
 <img src="project5_data/part_A/4_1.png" width="50%">
 
@@ -110,11 +110,11 @@ In part 1.4, we use the diffusion model to denoise an image. Another thing we ca
 
 You may have noticed that some of the generated images in the prior section are not very good. In order to greatly improve image quality (at the expense of image diversity), we can use a technique called [Classifier-Free Guidance](https://arxiv.org/abs/2207.12598).
 
-In CFG, we compute both a noise estimate conditioned on a text prompt, and an unconditional noise estimate. We denote these $\epsilon_c$ and $\epsilon_u$. Then, we let our new noise estimate be
+In CFG, we compute both a noise estimate conditioned on a text prompt, and an unconditional noise estimate. We denote these $\epsilon_c$ and $$\epsilon_u$$. Then, we let our new noise estimate be
 
 $$\epsilon = \epsilon_u + \gamma (\epsilon_c - \epsilon_u) \tag{4}$$
 
-where $\gamma$ controls the strength of CFG. Notice that for $\gamma=0$, we get an unconditional noise estimate, and for $\gamma=1$ we get the conditional noise estimate. The magic happens when $\gamma > 1$. In this case, we get much higher quality images. Why this happens is still up to vigorous debate. For more information on CFG, you can check out [this blog post](https://sander.ai/2022/05/26/guidance.html).
+where $$\gamma$$ controls the strength of CFG. Notice that for $$\gamma=0$$, we get an unconditional noise estimate, and for $$\gamma=1$$ we get the conditional noise estimate. The magic happens when $$\gamma > 1$$. In this case, we get much higher quality images. Why this happens is still up to vigorous debate. For more information on CFG, you can check out [this blog post](https://sander.ai/2022/05/26/guidance.html).
 
 Please implement the `iterative_denoise_cfg` function, identical to the `iterative_denoise` function but using classifier-free guidance. To get an unconditional noise estimate, we can just pass an empty prompt embedding to the diffusion model (the model was trained to predict an unconditional noise estimate when given an empty text prompt).
 
@@ -161,9 +161,9 @@ Please find an image from the internet and apply edits exactly as above. And als
 
 #### 1.7.2 Inpainting
 
-We can use the same procedure to implement inpainting (following the [RePaint](https://arxiv.org/abs/2201.09865) paper). That is, given an image $x_{orig}$, and a binary mask $\bf m$, we can create a new image that has the same content where $\bf m$ is 0, but new content wherever $\bf m$ is 1.
+We can use the same procedure to implement inpainting (following the [RePaint](https://arxiv.org/abs/2201.09865) paper). That is, given an image $$x_{orig}$$, and a binary mask $$\bf m$$, we can create a new image that has the same content where $$\bf m$$ is 0, but new content wherever $$\bf m$$ is 1.
 
-To do this, we can run the diffusion denoising loop. But at every step, after obtaining $x_t$, we "force" $x_t$ to have the same pixels as $x_{orig}$ where $\bf m$ is 0, i.e.:
+To do this, we can run the diffusion denoising loop. But at every step, after obtaining $$x_t$$, we "force" $x_t$ to have the same pixels as $x_{orig}$ where $$\bf m$$ is 0, i.e.:
 
 $$ x_t \leftarrow \textbf{m} x_t + (1 - \textbf{m}) \text{forward}(x_{orig}, t) \tag{5}$$
 
@@ -188,31 +188,42 @@ To do this, we will denoise an image $x_t$ at step $t$ normally with the prompt 
 
 The full algorithm is:
 
-$ \epsilon_1 = \text{UNet}(x_t, t, p_1) $
+$$ \epsilon_1 = \text{UNet}(x_t, t, p_1) $$
 
-$ \epsilon_2 = \text{flip}(\text{UNet}(\text{flip}(x_t), t, p_2))$
+$$ \epsilon_2 = \text{flip}(\text{UNet}(\text{flip}(x_t), t, p_2))$$
 
-$ \epsilon = (\epsilon_1 + \epsilon_2) / 2 $
+$$ \epsilon = (\epsilon_1 + \epsilon_2) / 2 $$
 
-where UNet is the diffusion model UNet from before, $\text{flip}(\cdot)$ is a function that flips the image, and $p_1$ and $p_2$ are two different text prompt embeddings. And our final noise estimate is $\epsilon$. Please implement the above algorithm and show example of an illusion.
+where UNet is the diffusion model UNet from before, $$\text{flip}(\cdot)$$ is a function that flips the image, and $p_1$ and $p_2$ are two different text prompt embeddings. And our final noise estimate is $$\epsilon$$. Please implement the above algorithm and show example of an illusion.
 
 ![](project5_data/part_A/8_1.png)
 
 ![](project5_data/part_A/8_2.png)
 
+![](project5_data/part_A/8_3.png)
+
+
 #### 1.9 Hybrid Images
 
 In this part we'll implement [Factorized Diffusion](https://dangeng.github.io/factorized_diffusion/) and create hybrid images just like in project 2.
 
-In order to create hybrid images with a diffusion model we can use a similar technique as above. We will create a composite noise estimate $\epsilon$, by estimating the noise with two different text prompts, and then combining low frequencies from one noise estimate with high frequencies of the other. The algorithm is:
+In order to create hybrid images with a diffusion model we can use a similar technique as above. We will create a composite noise estimate $$\epsilon$$, by estimating the noise with two different text prompts, and then combining low frequencies from one noise estimate with high frequencies of the other. The algorithm is:
 
-$ \epsilon_1 = \text{UNet}(x_t, t, p_1) $
+$$ \epsilon_1 = \text{UNet}(x_t, t, p_1) $$
 
-$ \epsilon_2 = \text{UNet}(x_t, t, p_2) $
+$$ \epsilon_2 = \text{UNet}(x_t, t, p_2) $$
 
-$ \epsilon = f_\text{lowpass}(\epsilon_1) + f_\text{highpass}(\epsilon_2)$
+$$ \epsilon = f_\text{lowpass}(\epsilon_1) + f_\text{highpass}(\epsilon_2)$$
 
-where UNet is the diffusion model UNet, $f_\text{lowpass}$ is a low pass function, $f_\text{highpass}$ is a high pass function, and $p_1$ and $p_2$ are two different text prompt embeddings. Our final noise estimate is $\epsilon$. Please show an example of a hybrid image using this technique (you may have to run multiple times to get a really good result for the same reasons as above). We recommend that you use a gaussian blur of kernel size 33 and sigma 2.
+where UNet is the diffusion model UNet, $$f_\text{lowpass}$$ is a low pass function, $$f_\text{highpass}$$ is a high pass function, and $$p_1$$ and $$p_2$$ are two different text prompt embeddings. Our final noise estimate is $$\epsilon$$. Please show an example of a hybrid image using this technique (you may have to run multiple times to get a really good result for the same reasons as above). We recommend that you use a gaussian blur of kernel size 33 and sigma 2.
+
+![](project5_data/part_A/9_1.png)
+
+![](project5_data/part_A/9_2.png)
+
+![](project5_data/part_A/9_3.png)
+
+![](project5_data/part_A/9_4.png)
 
 
 
