@@ -18,7 +18,7 @@
 </style>
 
 # CS 180 Final Project
-Junye Wang 3040815937  Chuyan Zhou 
+Junye Wang 3040815937  Chuyan Zhou 3040814117
 
 # Project 1: High Dynamic Range
 <div style="display: flex; flex-direction: column; gap: 5px;">
@@ -56,7 +56,7 @@ There are two major components to this project:
 ### 1. Stage 1: Film Response Recovery (g solve)
 - $$g(Z)$$: response curve to be recovered
 - $$Z$$: pixel value (N_pixels x N_images)
-- $$\lmbda$$: smoothness parameter
+- $$\lambda$$: smoothness parameter
 
 $$g(Z_{ij}) = \ln E_i + \ln \Delta t_j$$
 
@@ -78,6 +78,7 @@ $$
 
 ## Stage 2: Constructing the High Dynamic Range Radiance Map
 Once the response curve $$g$$ is recovered, it can be used to quickly convert pixel values to relative radiance values.
+
 $$
 \ln E_i = g(Z_{ij}) - \ln \Delta t_j
 $$
@@ -102,45 +103,45 @@ $$
 
 1. **Compute Intensity (I)**  
    Calculate the intensity by averaging the color channels:
-   $ I = \frac{R + G + B}{3} $
+   $$ I = \frac{R + G + B}{3} $$
 
 2. **Compute Chrominance Channels**  
    Normalize the color channels with respect to the intensity:
-   $ R/I, G/I, B/I $
+   $$ R/I, G/I, B/I $$
 
 3. **Log Intensity Calculation**  
    Transform the intensity into the logarithmic domain:
-   $ L = \log_2(I) $
+   $$ L = \log_2(I) $$
 
 4. **Bilateral Filtering**  
    Apply a bilateral filter to smooth the log intensity while preserving edges:
-   $ B = bf(L) $
+   $$ B = bf(L) $$
 
 5. **Detail Layer Extraction**  
    Subtract the filtered base from the log intensity to isolate details:
-   $ D = L - B $
+   $$ D = L - B $$
 
 6. **Base Adjustment**  
    Adjust the base layer with an offset and scale:
-   $ B' = (B - o) * s $
+   $$ B' = (B - o) * s $$
    
    Where:
    - The offset `o` is set such that the maximum intensity of the base is 1, since the values are in the log domain:
-     $ o = max(B) $
+     $$ o = max(B) $$
    - The scale `s` is determined to cover a dynamic range of `dR` stops:
-     $ s = \frac{dR}{max(B) - min(B)} $
+     $$ s = \frac{dR}{max(B) - min(B)} $$
 
 7. **Reconstruct Log Intensity**  
    Combine the adjusted base and detail layers:
-   $ O = 2^{(B' + D)} $
+   $$ O = 2^{(B' + D)} $$
 
 8. **Color Reintegration**  
    Restore the colors using the chrominance channels:
-   $ R',G',B' = O * (R/I, G/I, B/I) $
+   $$ R',G',B' = O * (R/I, G/I, B/I) $$
 
 9. **Gamma Compression**  
    Apply gamma correction to prevent the image from appearing too dark:
-   $ result = (R',G',B')^{\gamma} $
+   $$ result = (R',G',B')^{\gamma} $$
 
 <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0;">
     <!-- Headers -->
@@ -222,3 +223,19 @@ $$
 
 - The results from standard bilateral filtering and fast bilateral filtering are nearly identical. 
 - However, the performance difference is substantial - the fast bilateral filter processes each sample image in less than a second, while the standard bilateral filter takes approximately 5 minutes. This demonstrates a significant improvement in computational efficiency.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Project 2: Image Quilting
