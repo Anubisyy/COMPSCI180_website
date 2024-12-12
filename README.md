@@ -7,3 +7,4 @@
 3. [Project3](/project3.md)
 4. [Project4](/project4.md)
 5. [Project5](/project5.md)
+6. [Final_Project](/Final_Project.md)
